@@ -83,7 +83,7 @@ export default {
       } else if (text === "/help") {
         await sendMessage(
           chatId,
-          `📖 <b>راهنما:</b>\n\n/start - شروع\n/menu - منو\n/services - خدمات\n/help - راهنما`,
+          `📖 <b>راهنما:</b>\n\n/start - شروع\n/menu - منو\n/help - راهنما`,
           getMainMenu()
         );
       } else if (text === "📞 تماس با ما") {

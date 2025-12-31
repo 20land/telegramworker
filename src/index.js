@@ -20,21 +20,18 @@ function getMainMenu() {
       [
         {
           text: "🎁 مشاوره رایگان",
-          web_app: { url: `${WEBAPP_URL}?landing=miniapp_1` },
-        },
-        {
-          text: "💆 خدمات پوست",
-          web_app: { url: `${WEBAPP_URL}?landing=miniapp_2` },
-        },
-      ],
-      [
-        {
-          text: "💇 خدمات مو",
-          web_app: { url: `${WEBAPP_URL}?landing=miniapp_3` },
+          web_app: { url: `${WEBAPP_URL}` },
         },
         { text: "📞 تماس با ما" },
       ],
-      [{ text: "📍 آدرس کلینیک" }, { text: "❓ سوالات متداول" }],
+      // [
+      //   {
+      //     text: "💇 خدمات مو",
+      //     web_app: { url: `${WEBAPP_URL}?landing=miniapp_3` },
+      //   },
+
+      // ],
+      // [{ text: "📍 آدرس کلینیک" }, { text: "❓ سوالات متداول" }],
     ],
     resize_keyboard: true,
     is_persistent: true,
@@ -47,16 +44,10 @@ function getInlineMenu() {
       [
         {
           text: "🎁 مشاوره رایگان",
-          web_app: { url: `${WEBAPP_URL}?landing=miniapp_1` },
+          web_app: { url: `${WEBAPP_URL}` },
         },
       ],
-      [
-        {
-          text: "💆 پوست",
-          web_app: { url: `${WEBAPP_URL}?landing=miniapp_2` },
-        },
-        { text: "💇 مو", web_app: { url: `${WEBAPP_URL}?landing=miniapp_3` } },
-      ],
+      [{ text: "📞 تماس با ما" }],
     ],
   };
 }
@@ -98,16 +89,22 @@ export default {
       } else if (text === "📞 تماس با ما") {
         await sendMessage(
           chatId,
-          `📞 <b>راه‌های ارتباطی:</b>\n\n☎️ تلفن: 021-12345678\n📱 موبایل: 0912-123-4567`,
-          getMainMenu()
+          `📞 <b>راه‌های ارتباطی:</b>\n\n☎️ برای تماس روی دکمه زیر کلیک کنید:`,
+          {
+            inline_keyboard: [
+              [{ text: "📞 تماس: 021-9100-9893", url: "tel:02191009893" }],
+            ],
+          }
         );
-      } else if (text === "📍 آدرس کلینیک") {
-        await sendMessage(
-          chatId,
-          `📍 <b>آدرس:</b>\n\nتهران، خیابان ولیعصر، ...`,
-          getMainMenu()
-        );
-      } else if (text === "❓ سوالات متداول") {
+      }
+      //  else if (text === "📍 آدرس کلینیک") {
+      //   await sendMessage(
+      //     chatId,
+      //     `📍 <b>آدرس:</b>\n\nتهران، خیابان ولیعصر، ...`,
+      //     getMainMenu()
+      //   );
+      // }
+      else if (text === "❓ سوالات متداول") {
         await sendMessage(
           chatId,
           `❓ <b>سوالات متداول:</b>\n\n<b>مشاوره رایگانه؟</b>\nبله، کاملاً رایگان!`,

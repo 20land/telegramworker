@@ -24,14 +24,6 @@ function getMainMenu() {
         },
         { text: "📞 تماس با ما" },
       ],
-      // [
-      //   {
-      //     text: "💇 خدمات مو",
-      //     web_app: { url: `${WEBAPP_URL}?landing=miniapp_3` },
-      //   },
-
-      // ],
-      // [{ text: "📍 آدرس کلینیک" }, { text: "❓ سوالات متداول" }],
     ],
     resize_keyboard: true,
     is_persistent: true,
@@ -47,7 +39,7 @@ function getInlineMenu() {
           web_app: { url: `${WEBAPP_URL}` },
         },
       ],
-      [{ text: "📞 تماس با ما" }],
+      [{ text: "📞 تماس: 021-9100-9893", url: "tel:02191009893" }],
     ],
   };
 }
@@ -76,17 +68,24 @@ export default {
           `سلام <b>${firstName}</b> عزیز! 👋\n\nبه <b>بیستلند شاپ</b> خوش آمدید 🌟\n\nاز منوی زیر انتخاب کنید 👇`,
           getMainMenu()
         );
-      } else if (text === "/menu") {
+        return new Response("OK");
+      }
+
+      if (text === "/menu") {
         await sendMessage(chatId, "📋 منوی اصلی:", getMainMenu());
-      } else if (text === "/services") {
-        await sendMessage(chatId, "🌟 <b>خدمات ما:</b>", getInlineMenu());
-      } else if (text === "/help") {
+        return new Response("OK");
+      }
+
+      if (text === "/help") {
         await sendMessage(
           chatId,
           `📖 <b>راهنما:</b>\n\n/start - شروع\n/menu - منو\n/help - راهنما`,
           getMainMenu()
         );
-      } else if (text === "📞 تماس با ما") {
+        return new Response("OK");
+      }
+
+      if (text === "📞 تماس با ما") {
         await sendMessage(
           chatId,
           `📞 <b>راه‌های ارتباطی:</b>\n\n☎️ برای تماس روی دکمه زیر کلیک کنید:`,
@@ -96,27 +95,15 @@ export default {
             ],
           }
         );
+        return new Response("OK");
       }
-      //  else if (text === "📍 آدرس کلینیک") {
-      //   await sendMessage(
-      //     chatId,
-      //     `📍 <b>آدرس:</b>\n\nتهران، خیابان ولیعصر، ...`,
-      //     getMainMenu()
-      //   );
-      // }
-      else if (text === "❓ سوالات متداول") {
-        await sendMessage(
-          chatId,
-          `❓ <b>سوالات متداول:</b>\n\n<b>مشاوره رایگانه؟</b>\nبله، کاملاً رایگان!`,
-          getMainMenu()
-        );
-      } else {
-        await sendMessage(
-          chatId,
-          `از منو استفاده کنید یا /start بزنید.`,
-          getMainMenu()
-        );
-      }
+
+      // پیام پیش‌فرض
+      await sendMessage(
+        chatId,
+        `از منو استفاده کنید یا /start بزنید.`,
+        getMainMenu()
+      );
 
       return new Response("OK");
     } catch (error) {

@@ -24,6 +24,7 @@ function getMainMenu() {
         },
         { text: "📞 تماس با ما" },
       ],
+      [{ text: "💬 پشتیبانی تلگرام" }],
     ],
     resize_keyboard: true,
     is_persistent: true,
@@ -90,6 +91,19 @@ export default {
           chatId,
           `📞 راه‌های ارتباطی:\n\n☎️ شماره تماس:\n<code>02191009893</code>\n\n👆 روی شماره بزنید تا کپی شود`,
           getMainMenu()
+        );
+        return new Response("OK");
+      }
+
+      if (text === "💬 پشتیبانی تلگرام") {
+        await sendMessage(
+          chatId,
+          `💬 <b>پشتیبانی تلگرام:</b>\n\nبرای ارتباط با پشتیبانی روی دکمه زیر کلیک کنید 👇`,
+          {
+            inline_keyboard: [
+              [{ text: "💬 چت با پشتیبانی", url: "https://t.me/Bistland200" }],
+            ],
+          }
         );
         return new Response("OK");
       }
